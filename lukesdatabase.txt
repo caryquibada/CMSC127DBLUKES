@@ -1,0 +1,38 @@
+create database lukes;
+use lukes;
+create table patient(
+patient_id int unsigned not null auto_increment primary key,
+patient_fname varchar(30) not null,
+patient_lname varchar(30) not null,
+patient_minitial char(1) not null,
+schoolname int references school(school_id),
+age tinyint(3) not null,
+sex enum('m','f') not null,
+present_address varchar(150) null,
+provincial_address varchar(150) null,
+civil_status char(20) null,
+birthdate date null,
+birthplace varchar(150) null,
+religion varchar(30) null,
+occupation varchar(50) null,
+monthly_income int(10) unsigned null,
+contact_number tinyint(30) unsigned null,
+highest_educ_attainment varchar(50) null,
+date_of_operation date null,
+date_of_discharge date null
+);
+create table ear(
+patient_id int not null,
+left_ear varchar(5) null,
+right_ear varchar(5) null,
+ear_remark varchar(500) null,
+foreign key(patient_id) references patient(patient_id)
+);
+create table school(
+school_id int unsigned not null auto_increment,
+location varchar(150) not null,
+contact_person varchar(150) not null,
+activity varchar(30) not null,
+date_visited date not null,
+primary key(school_id)
+);

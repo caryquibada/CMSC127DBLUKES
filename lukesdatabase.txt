@@ -27,10 +27,18 @@ ear_remark varchar(500) null,
 foreign key(patient_id) references patient(patient_id)
 );
 create table school(
-school_id int unsigned not null auto_increment unique,
+school_id int unsigned not null auto_increment primary key,
 location varchar(150) not null,
 contact_person varchar(150) not null,
 activity varchar(30) not null,
 date_visited date not null,
-primary key(school_id)
+);
+create table eye(
+patient_id int not null,
+visual_acuity varchar(8) not null,
+with_pinhole varchar(8) not null,
+rx varchar(50) not null,
+pd varchar(50) not null,
+eye_remark varchar(500)
+foreign key(patient_id) references patient(patient_id)
 );

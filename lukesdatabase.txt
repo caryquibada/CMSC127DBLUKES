@@ -1,5 +1,5 @@
-create database lukes;
-use lukes;
+create database upcmscdb;
+use upcmscdb;
 create table patient(
 patient_id int unsigned not null auto_increment primary key,
 patient_fname varchar(30) not null,
@@ -34,11 +34,10 @@ activity varchar(30) not null,
 date_visited date not null,
 );
 create table eye(
-patient_id int not null,
+patient_id int references patient(patient_id),
 visual_acuity varchar(8) not null,
 with_pinhole varchar(8) not null,
 rx varchar(50) not null,
 pd varchar(50) not null,
 eye_remark varchar(500)
-foreign key(patient_id) references patient(patient_id)
 );

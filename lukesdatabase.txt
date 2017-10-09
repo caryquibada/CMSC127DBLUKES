@@ -5,7 +5,7 @@ patient_id int unsigned not null auto_increment primary key,
 patient_fname varchar(30) not null,
 patient_lname varchar(30) not null,
 patient_minitial char(1) not null,
-school_number int references school(school_id),
+school_number int references school(school_id) on update cascade,
 age tinyint(3) not null,
 sex enum('m','f') not null,
 present_address varchar(150) null,
@@ -20,21 +20,20 @@ contact_number tinyint(30) unsigned null,
 highest_educ_attainment varchar(50) null
 );
 create table ear(
-patient_id int not null,
+patient_id int references patient(patient_id) on update cascade,
 left_ear varchar(5) null,
 right_ear varchar(5) null,
-ear_remark varchar(500) null,
-foreign key(patient_id) references patient(patient_id)
+ear_remark varchar(500) null
 );
 create table school(
 school_id int unsigned not null auto_increment primary key,
 location varchar(150) not null,
 contact_person varchar(150) not null,
 activity varchar(30) not null,
-date_visited date not null,
+date_visited date not null
 );
 create table eye(
-patient_id int references patient(patient_id),
+patient_id int references patient(patient_id) on update cascade,
 visual_acuity varchar(8) not null,
 with_pinhole varchar(8) not null,
 rx varchar(50) not null,

@@ -7,11 +7,12 @@
 	if(!mysqli_select_db($connect,'upcmscdb')){
 		echo 'Database "upcmscdb" is not selected';
 	}
+	$sname=$_POST['sname'];
 	$location=$_POST['slocation'];
-	$contact_person=$_POST['contact_person'];
-	$activity=$_POST['activity'];
+	$contact_person=$_POST['scontact_person'];
+	$activity=$_POST['sactivity'];
 	$date_visited=$_POST['datevisited'];
-	$sql="INSERT INTO table (PATIENT_FNAME,PATIENT_LNAME) VALUES ('$fname','$lname')";
+	$sql="INSERT INTO school(SCHOOL_NAME,LOCATION,CONTACT_PERSON,ACTIVITY) VALUES ('$sname','$location','$contact_person','$activity')";
 	if(!mysqli_query($connect,$sql)){
 		echo 'Insert failure';
 	}else{

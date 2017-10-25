@@ -1,5 +1,5 @@
-create database upcmscdb;
-use upcmscdb;
+create database lukedb;
+use lukedb;
 create table patient(
 patient_id int unsigned not null auto_increment primary key,
 patient_fname varchar(30) not null,
@@ -35,9 +35,13 @@ date_visited date not null
 );
 create table eye(
 patient_id int references patient(patient_id) on update cascade,
-visual_acuity varchar(8) not null,
-with_pinhole varchar(8) not null,
-rx varchar(50) not null,
+lvisual_acuity varchar(8) not null,
+rvisual_acuity varchar(8) not null,
+lwith_pinhole varchar(8) not null,
+rwith_pinhole varchar(8) not null,
+r_rx varchar(50) not null,
+l_rx varchar(50) not null,
 pd varchar(50) not null,
 eye_remark varchar(500)
 );
+INSERT INTO school (school_id, school_name, location, contact_person, activity, date_visited) VALUES ('1', '-', 'NONE', 'NONE', 'NONE', '');

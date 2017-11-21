@@ -7,13 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
-
+    <script src="../pages/js/jquery.min.js"></script>  
+    <script src="../js/jquery.dataTables.min.js"></script>  
+    <script src="../js/dataTables.bootstrap.min.js"></script>    
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="../dist/js/sb-admin-2.js"></script>
+    
+ 
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
 
 </head>
 
@@ -131,7 +139,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -148,41 +158,40 @@
             </div>
             <div class="panel panel-default">
         		<div class="panel-body">
-    	            <table width="100%" class="table table-hover">
+    	            <table class="table table-striped table-bordered" id="school">
     	                <thead>
     	                    <tr>
-            	            <th>School Name</th>
-                	        <th>Location</th>
-                    	    <th>Contact Person</th>
-                    	    <th>Activity Held</th>
-                	        <th>Date Visited</th>
-                            <th><i class="fa fa-pencil fa-fw"></i></th>
-							<th><i class="fa fa-times fa-fw"></i></th>
+            	            <td>School Name</td>
+                	        <td>Location</td>
+                    	    <td>Contact Person</td>
+                    	    <td>Activity Held</td>
+                	        <td>Date Visited</td>
+                            <td>Action</td>
                     	    </tr>
                     	</thead>
                     	<tbody>
-<?php
-$connect = mysqli_connect('localhost','root','');
-if(!$connect){
-		echo 'No connection to server';
-	}
-	if(!mysqli_select_db($connect,'lukedb')){
-		echo 'Database "lukedb" is not selected';
-	}
-$query="SELECT* FROM school";
-$result=mysqli_query($connect,$query);
-while ($row=mysqli_fetch_array($result)) {
-	$f1=$row['school_name'];
-	$f2=$row['location'];
-	$f3=$row['contact_person'];
-	$f4=$row['activity'];
-	$f5=$row['date_visited'];
-	$f6=$row['school_id'];
-	if($f1!="-"){
-	echo "<tr><td>".$f1."</td><td>" .$f2."</td><td>".$f3."</td><td>" .$f4."</td><td>" .$f5."</td><td><a href="."'updateS.php?id=$f6';"."><i class='fa fa-pencil fa-fw'></i></a></td><td><a href=\"deleteS.php?id=$f6\" onclick=\"return confirm('Are you sure you want to delete?')\"><i class='fa fa-times-circle fa-fw'></i></td></tr>";
-	}
-	}
-?>
+                        <?php
+                        $connect = mysqli_connect('localhost','root','');
+                        if(!$connect){
+		                    echo 'No connection to server';
+	                    }
+	                    if(!mysqli_select_db($connect,'lukedb')){
+		                    echo 'Database "lukedb" is not selected';
+	                    }
+                        $query="SELECT* FROM school";
+                        $result=mysqli_query($connect,$query);
+                        while ($row=mysqli_fetch_array($result)) {
+	                        $f1=$row['school_name'];
+	                        $f2=$row['location'];
+	                        $f3=$row['contact_person'];
+	                        $f4=$row['activity'];
+                            $f5=$row['date_visited'];
+                            $f6=$row['school_id'];
+	                        if($f1!="-"){
+	                        echo "<tr><td>".$f1."</td><td>" .$f2."</td><td>".$f3."</td><td>" .$f4."</td><td>" .$f5."</td><td><a href="."'updateS.php?id=$f6';"."><i class='fa fa-pencil fa-fw'></i></a><a href=\"deleteS.php?id=$f6\" onclick=\"return confirm('Are you sure you want to delete?')\"><i class='fa fa-trash fa-fw'></i></td></tr>";
+	                        }
+	                    }
+                        ?>
                     	</tbody>
                 	</table>
         		</div>
@@ -190,11 +199,12 @@ while ($row=mysqli_fetch_array($result)) {
         </div>
     </div>
 
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-    <script src="../dist/js/sb-admin-2.js"></script>
-
+    
 </body>
 
 </html>
+<script>
+    $(document).ready(function(){
+    $('#school').DataTable();
+    });
+</script>

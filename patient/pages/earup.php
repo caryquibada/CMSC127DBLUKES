@@ -6,6 +6,7 @@
 
 <head>
 <a name="author" content="">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>Luke Foundation, Inc.</title>
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -127,7 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -163,13 +166,15 @@
             <label>Patient:</label>
 				 <?php
                      $connect = mysqli_connect('localhost','root','');
+                     $id=$_GET['pid'];
+                     $school=$_GET['school'];
                          if(!$connect){
                             echo 'No connection to server';
                          }
                          if(!mysqli_select_db($connect,'lukedb')){
                              echo 'Database "lukedb" is not selected';
                           }
-                         $query="SELECT * FROM  patient where patient_id = $_GET[id]";
+                         $query="SELECT * FROM  patient where patient_id = $id";
                          $menu= " ";
                          $result=mysqli_query($connect,$query);
                         while($row=mysqli_fetch_array($result)){
@@ -182,9 +187,8 @@
 						echo $menu;
 			
 
-                         $id = $_GET['id'];
                         $connect = mysqli_connect('localhost','root','');
-                        echo "<form role=\"form\" action=\"updateear.php?id= $id\" method=\"post\">";
+                        echo "<form role=\"form\" action=\"updateear.php?pid=$id&school=$school\" method=\"post\">";
                     if(!$connect){
 		                echo 'No connection to server';
 	                }

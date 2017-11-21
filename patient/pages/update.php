@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
 
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -133,7 +133,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -173,28 +175,30 @@
                    <!--  <p>insert details here</p>                - - - - - - - - - - - - - - - - P A T I E N T  D E T A I L S  - - - - - - - - - - - - - - - -->
                    
                     <?php
-                        $id = $_GET['id'];
+                        $id = $_GET['pid'];
                         $connect = mysqli_connect('localhost','root','');
-                        echo "<form role=\"form\" action=\"updatesql.php?id=$id\" method=\"post\">";
-                    if(!$connect){
-		                echo 'No connection to server';
-	                }
-                	if(!mysqli_select_db($connect,'lukedb')){
-	                	echo 'Database "lukedb" is not selected';
-                	}
-                    // sql to delete a record
-                      $sql = "SELECT * FROM patient WHERE patient_id = $id"; 
-                    $result=mysqli_query($connect,$sql);
-                      while ($row=mysqli_fetch_array($result)) {
-                        $f7=$row['patient_fname'];
-                        $f6=$row['patient_minitial'];
-                        $f3=$row['patient_lname'];
-                        $f4=$row['age'];
-                        $f5=$row['sex'];
-                        $f17=$row['school_number'];
-                        $f16=$row['patient_id'];
-                        $remark=$row['patient_remark'];
-                     }
+                        if(!$connect){
+                            echo 'No connection to server';
+                        }
+                        if(!mysqli_select_db($connect,'lukedb')){
+                            echo 'Database "lukedb" is not selected';
+                        }
+                        // sql to delete a record
+                          $sql = "SELECT * FROM patient WHERE patient_id = $id"; 
+                        $result=mysqli_query($connect,$sql);
+                          while ($row=mysqli_fetch_array($result)) {
+                            $f7=$row['patient_fname'];
+                            $f6=$row['patient_minitial'];
+                            $f3=$row['patient_lname'];
+                            $f4=$row['age'];
+                            $f5=$row['sex'];
+                            $f17=$row['school_number'];
+                            $f16=$row['patient_id'];
+                            $remark=$row['patient_remark'];
+                         }
+                       
+                        echo "<form role=\"form\" action=\"updatesql.php?id=$id&school=$f17\" method=\"post\">";
+                   
                       echo"
                       
                         <fieldset>

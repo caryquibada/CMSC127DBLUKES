@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -127,7 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -158,6 +161,8 @@
                                     </div>";
                             }
                         }
+                        $ear=["Normal","20/10","20/12.5","20/16","20/20","20/25","20/32","20/40","20/50","20/63","20/80","20/100","20/125","20/160","20/200","CF 1","CF 2","CF 3","CF 4","CF 5","CF 6","CF 7","CF 8","CF 9","CF 10","CF 11","CF 12","CF 13","CF 14","CF 15","CF 16","CF 17","CF 18","CF 19","CF 20","HM","+LP","-LP"];
+                        $five=["","1","2","3","4","5"]
                     ?>
 				<div class="form-group col-lg-12">
                 <div class="form-group col-lg-12">
@@ -170,7 +175,8 @@
                              if(!mysqli_select_db($connect,'lukedb')){
                                  echo 'Database "lukedb" is not selected';
                               }
-                              $id = $_GET['id'];
+                              $id = $_GET['pid'];
+                              $school=$_GET['school'];
                              $query="SELECT * FROM  patient where patient_id = $id";
                              $menu= " ";
                              $result=mysqli_query($connect,$query);
@@ -184,7 +190,7 @@
                             echo $menu;
                             
                             $connect = mysqli_connect('localhost','root','');
-                            echo "<form role=\"form\" action=\"updateeye.php?id= $id\" method=\"post\">";
+                            echo "<form role=\"form\" action=\"updateeye.php?id= $id&school=$school\" method=\"post\">";
                         if(!$connect){
                             echo 'No connection to server';
                         }
@@ -222,110 +228,52 @@
                                 <label>Visual Acuity:</label>
 								<div class=\"form-group input-group\">
 								<select class=\"form-control\" name=\"visualacuityl\">
-                                <option value=\"Normal\">Normal</option>
-                                <option value=\"20/10\">20/10</option>
-                                <option value=\"20/12.5\">20/12.5</option>
-                                <option value=\"20/16\">20/16</option>
-                                <option value=\"20/20\" selected>20/20</option>
-                                <option value=\"20/25\">20/25</option>
-                                <option value=\"20/32\">20/32</option>
-                                <option value=\"20/40\">20/40</option>
-                                <option value=\"20/50\">20/50</option>
-                                <option value=\"20/63\">20/63</option>
-                                <option value=\"20/80\">20/80</option>
-                                <option value=\"20/100\">20/100</option>
-                                <option value=\"20/125\">20/125</option>
-                                <option value=\"20/160\">20/160</option>
-                                <option value=\"20/200\">20/200</option>
-                                <option value=\"CF 1\">CF 1</option>
-                                <option value=\"CF 2\">CF 2</option>
-                                <option value=\"CF 3\">CF 3</option>
-                                <option value=\"CF 4\">CF 4</option>
-                                <option value=\"CF 5\">CF 5</option>
-                                <option value=\"CF 6\">CF 6</option>
-                                <option value=\"CF 7\">CF 7</option>
-                                <option value=\"CF 8\">CF 8</option>
-                                <option value=\"CF 9\">CF 9</option>
-                                <option value=\"CF 10\">CF 10</option>
-                                <option value=\"CF 11\">CF 11</option>
-                                <option value=\"CF 12\">CF 12</option>
-                                <option value=\"CF 13\">CF 13</option>
-                                <option value=\"CF 14\">CF 14</option>
-                                <option value=\"CF 15\">CF 15</option>
-                                <option value=\"CF 16\">CF 16</option>
-                                <option value=\"CF 17\">CF 17</option>
-                                <option value=\"CF 18\">CF 18</option>
-                                <option value=\"CF 19\">CF 19</option>
-                                <option value=\"CF 20\">CF 20</option>
-                                <option value=\"HM\">HM</option>
-                                <option value=\"+LP\">+LP</option>
-                                <option value=\"-LP\">-LP</option>
-                                </select>
+                               ";
+                               list($left,$right)=explode('-',$lva);
+                               foreach($ear as $choice){
+                                   if($choice==$left){
+                                        echo "<option value=\"$left\" selected>$left</option>";
+                                   }else{
+                                    echo "<option value=\"$choice\">$choice</option>";
+                                   }
+                               }
+                                echo "</select>
                                 <span class=\"input-group-addon\">-</span>
-                                <select class=\"form-control\" name=\"visualacuityladd\">
-                                    <option value=\"\"></option>
-                                    <option value=\"1\">1</option>
-                                    <option value=\"2\">2</option>
-                                    <option value=\"3\">3</option>
-                                    <option value=\"4\">4</option>
-                                    <option value=\"5\">5</option>
+                                <select class=\"form-control\" name=\"visualacuityladd\">";
+                                foreach($five as $choice){
+                                    if($choice==$right){
+                                         echo "<option value=\"$right\" selected>$right</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                }
                                 
-								</select>
+								echo "</select>
 								</div>
                             </div>
                             <div class=\"form-group col-lg-6\">
                                 <label>With Pinhole:</label>
 								<div class=\"form-group input-group\">
-								<select class=\"form-control\" name=\"withpinholel\">
-                                <option value=\"Normal\">Normal</option>
-                                <option value=\"20/10\">20/10</option>
-                                <option value=\"20/12.5\">20/12.5</option>
-                                <option value=\"20/16\">20/16</option>
-                                <option value=\"20/20\" selected>20/20</option>
-                                <option value=\"20/25\">20/25</option>
-                                <option value=\"20/32\">20/32</option>
-                                <option value=\"20/40\">20/40</option>
-                                <option value=\"20/50\">20/50</option>
-                                <option value=\"20/63\">20/63</option>
-                                <option value=\"20/80\">20/80</option>
-                                <option value=\"20/100\">20/100</option>
-                                <option value=\"20/125\">20/125</option>
-                                <option value=\"20/160\">20/160</option>
-                                <option value=\"20/200\">20/200</option>
-                                <option value=\"CF 1\">CF 1</option>
-                                <option value=\"CF 2\">CF 2</option>
-                                <option value=\"CF 3\">CF 3</option>
-                                <option value=\"CF 4\">CF 4</option>
-                                <option value=\"CF 5\">CF 5</option>
-                                <option value=\"CF 6\">CF 6</option>
-                                <option value=\"CF 7\">CF 7</option>
-                                <option value=\"CF 8\">CF 8</option>
-                                <option value=\"CF 9\">CF 9</option>
-                                <option value=\"CF 10\">CF 10</option>
-                                <option value=\"CF 11\">CF 11</option>
-                                <option value=\"CF 12\">CF 12</option>
-                                <option value=\"CF 13\">CF 13</option>
-                                <option value=\"CF 14\">CF 14</option>
-                                <option value=\"CF 15\">CF 15</option>
-                                <option value=\"CF 16\">CF 16</option>
-                                <option value=\"CF 17\">CF 17</option>
-                                <option value=\"CF 18\">CF 18</option>
-                                <option value=\"CF 19\">CF 19</option>
-                                <option value=\"CF 20\">CF 20</option>
-                                <option value=\"HM\">HM</option>
-                                <option value=\"+LP\">+LP</option>
-                                <option value=\"-LP\">-LP</option>
-                                </select>
+								<select class=\"form-control\" name=\"withpinholel\">";
+                                list($left,$right)=explode('-',$lwp);
+                                foreach($ear as $choice){
+                                    if($choice==$left){
+                                         echo "<option value=\"$left\" selected>$left</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                }
+                               echo "</select>
                                 <span class=\"input-group-addon\">-</span>
-                                <select class=\"form-control\" name=\"withpinholeladd\">
-                                    <option value=\"\"></option>
-                                    <option value=\"1\">1</option>
-                                    <option value=\"2\">2</option>
-                                    <option value=\"3\">3</option>
-                                    <option value=\"4\">4</option>
-                                    <option value=\"5\">5</option>
-                                
-								</select>
+                                <select class=\"form-control\" name=\"withpinholeladd\">";
+                                foreach($five as $choice){
+                                    if($choice==$right){
+                                         echo "<option value=\"$right\" selected>$right</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                } 
+								echo "</select>
 								</div>
                             </div>
                             <div class=\"form-group col-lg-12\">
@@ -350,111 +298,51 @@
                         <div class=\"form-group col-lg-6\">
                                 <label>Visual Acuity:</label>
 								<div class=\"form-group input-group\">
-								<select class=\"form-control\" name=\"visualacuityr\">
-                                <option value=\"Normal\">Normal</option>
-                                <option value=\"20/10\">20/10</option>
-                                <option value=\"20/12.5\">20/12.5</option>
-                                <option value=\"20/16\">20/16</option>
-                                <option value=\"20/20\" selected>20/20</option>
-                                <option value=\"20/25\">20/25</option>
-                                <option value=\"20/32\">20/32</option>
-                                <option value=\"20/40\">20/40</option>
-                                <option value=\"20/50\">20/50</option>
-                                <option value=\"20/63\">20/63</option>
-                                <option value=\"20/80\">20/80</option>
-                                <option value=\"20/100\">20/100</option>
-                                <option value=\"20/125\">20/125</option>
-                                <option value=\"20/160\">20/160</option>
-                                <option value=\"20/200\">20/200</option>
-                                <option value=\"CF 1\">CF 1</option>
-                                <option value=\"CF 2\">CF 2</option>
-                                <option value=\"CF 3\">CF 3</option>
-                                <option value=\"CF 4\">CF 4</option>
-                                <option value=\"CF 5\">CF 5</option>
-                                <option value=\"CF 6\">CF 6</option>
-                                <option value=\"CF 7\">CF 7</option>
-                                <option value=\"CF 8\">CF 8</option>
-                                <option value=\"CF 9\">CF 9</option>
-                                <option value=\"CF 10\">CF 10</option>
-                                <option value=\"CF 11\">CF 11</option>
-                                <option value=\"CF 12\">CF 12</option>
-                                <option value=\"CF 13\">CF 13</option>
-                                <option value=\"CF 14\">CF 14</option>
-                                <option value=\"CF 15\">CF 15</option>
-                                <option value=\"CF 16\">CF 16</option>
-                                <option value=\"CF 17\">CF 17</option>
-                                <option value=\"CF 18\">CF 18</option>
-                                <option value=\"CF 19\">CF 19</option>
-                                <option value=\"CF 20\">CF 20</option>
-                                <option value=\"HM\">HM</option>
-                                <option value=\"+LP\">+LP</option>
-                                <option value=\"-LP\">-LP</option>
-                                </select>
+								<select class=\"form-control\" name=\"visualacuityr\">";
+                                list($left,$right)=explode('-',$rva);
+                                foreach($ear as $choice){
+                                    if($choice==$left){
+                                         echo "<option value=\"$left\" selected>$left</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                }
+                               echo "</select>
                                 <span class=\"input-group-addon\">-</span>
-                                <select class=\"form-control\" name=\"visualacuityradd\">
-                                    <option value=\"\"></option>
-                                    <option value=\"1\">1</option>
-                                    <option value=\"2\">2</option>
-                                    <option value=\"3\">3</option>
-                                    <option value=\"4\">4</option>
-                                    <option value=\"5\">5</option>
-                                
-								</select>
+                                <select class=\"form-control\" name=\"visualacuityradd\">";
+                                foreach($five as $choice){
+                                    if($choice==$right){
+                                         echo "<option value=\"$right\" selected>$right</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                } 
+								echo "</select>
 								</div>
                             </div>
                             <div class=\"form-group col-lg-6\">
                                 <label>With Pinhole:</label>
 								<div class=\"form-group input-group\">
-								<select class=\"form-control\" name=\"withpinholer\">
-                                <option value=\"Normal\">Normal</option>
-                                <option value=\"20/10\">20/10</option>
-                                <option value=\"20/12.5\">20/12.5</option>
-                                <option value=\"20/16\">20/16</option>
-                                <option value=\"20/20\" selected>20/20</option>
-                                <option value=\"20/25\">20/25</option>
-                                <option value=\"20/32\">20/32</option>
-                                <option value=\"20/40\">20/40</option>
-                                <option value=\"20/50\">20/50</option>
-                                <option value=\"20/63\">20/63</option>
-                                <option value=\"20/80\">20/80</option>
-                                <option value=\"20/100\">20/100</option>
-                                <option value=\"20/125\">20/125</option>
-                                <option value=\"20/160\">20/160</option>
-                                <option value=\"20/200\">20/200</option>
-                                <option value=\"CF 1\">CF 1</option>
-                                <option value=\"CF 2\">CF 2</option>
-                                <option value=\"CF 3\">CF 3</option>
-                                <option value=\"CF 4\">CF 4</option>
-                                <option value=\"CF 5\">CF 5</option>
-                                <option value=\"CF 6\">CF 6</option>
-                                <option value=\"CF 7\">CF 7</option>
-                                <option value=\"CF 8\">CF 8</option>
-                                <option value=\"CF 9\">CF 9</option>
-                                <option value=\"CF 10\">CF 10</option>
-                                <option value=\"CF 11\">CF 11</option>
-                                <option value=\"CF 12\">CF 12</option>
-                                <option value=\"CF 13\">CF 13</option>
-                                <option value=\"CF 14\">CF 14</option>
-                                <option value=\"CF 15\">CF 15</option>
-                                <option value=\"CF 16\">CF 16</option>
-                                <option value=\"CF 17\">CF 17</option>
-                                <option value=\"CF 18\">CF 18</option>
-                                <option value=\"CF 19\">CF 19</option>
-                                <option value=\"CF 20\">CF 20</option>
-                                <option value=\"HM\">HM</option>
-                                <option value=\"+LP\">+LP</option>
-                                <option value=\"-LP\">-LP</option>
-                                </select>
+								<select class=\"form-control\" name=\"withpinholer\">";
+                                list($left,$right)=explode('-',$rwp);
+                                foreach($ear as $choice){
+                                    if($choice==$left){
+                                         echo "<option value=\"$left\" selected>$left</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                }
+                               echo "</select>
                                 <span class=\"input-group-addon\">-</span>
-                                <select class=\"form-control\" name=\"withpinholeradd\">
-                                    <option value=\"\"></option>
-                                    <option value=\"1\">1</option>
-                                    <option value=\"2\">2</option>
-                                    <option value=\"3\">3</option>
-                                    <option value=\"4\">4</option>
-                                    <option value=\"5\">5</option>
-                                
-								</select>
+                                <select class=\"form-control\" name=\"withpinholeradd\">";
+                                foreach($five as $choice){
+                                    if($choice==$right){
+                                         echo "<option value=\"$right\" selected>$right</option>";
+                                    }else{
+                                     echo "<option value=\"$choice\">$choice</option>";
+                                    }
+                                } 
+								echo "</select>
 								</div>
                             </div>
                             <div class=\"form-group col-lg-12\">

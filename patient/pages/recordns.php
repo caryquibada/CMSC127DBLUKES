@@ -10,7 +10,11 @@
     <meta name="author" content="">
 
     <title>Luke Foundation, Inc.</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
+    <script src="../pages/js/jquery.min.js"></script>  
+    <script src="../js/jquery.dataTables.min.js"></script>  
+    <script src="../js/dataTables.bootstrap.min.js"></script>    
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -31,7 +35,7 @@
 <body>
 
 <div id="wrapper">
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-fixed" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -143,7 +147,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -156,37 +162,7 @@
         <button type="button" class="btn btn-primary btn-md col-md-offset-11" data-toggle="modal" data-target="#myModal">
 						Summary
 					</button>
-			<div class="form-group col-lg-offset-5">
-           
-            </br>
-                <form action="recordns.php" method="get">
-                <div class="form-group input-group custom-search-form pull-right">
-                <input type="text" class="form-control col-lg-3" placeholder="Search..." name="query" id="searchcategory">
-                        <span class="input-group-btn">         
-                        </span>
-                <select class="form-control col-lg-3" name="searchcategory">
-                    <option value="">-</option>
-                    <option value="patient_fname"> First Name</option>
-                    <option value="patient_lname"> Last Name</option>
-                    <option value="patient_minitial">Middle Initial</option>
-                    <option value="age">Age</option>
-                    <option value="sex">Sex</option>
-                    <option value="present_address">Present Address</option>
-                    <option value="provincial_address">Provincial Address</option>
-                    <option value="civil_status">Civil Status</option>
-                    <option value="birthdate">Birthdate</option>
-                    <option value="birthplace">Birthplace</option>
-                    <option value="religion">Religion</option>
-                    <option value="occupation">Occupation</option>
-                    <option value="monthly_income">Monthly Income</option>
-                    <option value="contact_number">Contact Number</option>
-                    <option value="highest_educ_attainment">Highest Educational Attainment</option>
-                </select>
-                    <span class="input-group-btn">         
-                        </span>
-                    <button type="submit" name="search_query" value="Search" id="searchcategory" class="btn btn-default col-lg-offset-9 pull-right"><i class="fa fa-search"></i> Search</button>
-                </div>
-            </div>
+			
 						<?php
 						$connect = mysqli_connect('localhost','root','');
 						if(!$connect){
@@ -195,160 +171,34 @@
 						if(!mysqli_select_db($connect,'lukedb')){
 							echo 'Database "lukedb" is not selected';
 						}
-						$query="SELECT* FROM patient";
-						
-						if(!empty($_GET['query'])){
-							$category=$_GET['searchcategory'];
-							if(empty($_GET['query'])){
-								$query="SELECT* FROM PATIENT";
-							}else if(empty($category)){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE patient_lname LIKE '%$value%' OR patient_fname LIKE '%$value%' OR patient_minitial LIKE '%$value%' OR age LIKE '%$value%' OR sex LIKE '%$value%'";
-							}else if($category=='patient_fname'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE patient_fname LIKE '%$value%'";
-							}else if($category=='patient_lname'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE patient_lname LIKE '%$value%'";
-							}else if($category=='patient_minitial'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE patient_minitial LIKE '%$value%'";
-							}else if($category=='age'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE age LIKE '%$value%'";
-							}else if($category=='sex'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE sex LIKE '%$value%'";
-							}else if($category=='present_address'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE present_address LIKE '%$value%'";
-							}else if($category=='provincial_address'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE provincial_address LIKE '%$value%'";
-							}else if($category=='civil_status'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE civil_status LIKE '%$value%'";
-							}else if($category=='birthdate'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE birthdate LIKE '%$value%'";
-							}else if($category=='birthplace'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE birthplace LIKE '%$value%'";
-							}else if($category=='religion'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE religion LIKE '%$value%'";
-							}else if($category=='occupation'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE occupation LIKE '%$value%'";
-							}else if($category=='monthly_income'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE monthly_income LIKE '%$value%'";
-							}else if($category=='contact_number'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE contact_number LIKE '%$value%'";
-							}else if($category=='highest_educ_attainment'){
-								$value=$_GET['query'];
-								$query="SELECT* FROM PATIENT WHERE highest_educ_attainment LIKE '%$value%'";
-							}
-						}
-						if(!empty($_GET['searchcategory'])&&!empty($_GET['query'])){
-							$category=$_GET['searchcategory'];
-							$value=$_GET['query'];
-						}else{
-							$category="";
-							$value="";
-						}
-						echo "</div><table width=\"100%\" class=\"table table-hover table-striped\"><thead><tr>";
-                $new_sort_type="asc";
+						$query="SELECT* FROM patient where school_number=1";
+						echo "<div class=\"table-responsive\"><table id=\"notStudent\" class=\"table table-hover table-striped\"><thead><tr>";
                     if(isset($_REQUEST['order'])){
                         $order = $_REQUEST['order'];
                         if($order=='asc'){
                             $new_sort_type = 'desc';
                         }
                     }
-                    echo "<th><a href=\"recordns.php?sort=lname&order=".$new_sort_type."&query=$value&searchcategory=$category\"/>Last Name</th>
-            	          <th><a href=\"recordns.php?sort=fname&order=".$new_sort_type."&query=$value&searchcategory=$category\"/>First Name</th>
-                	      <th><a href=\"recordns.php?sort=minitial&order=".$new_sort_type."&query=$value&searchcategory=$category\"/>MI</th>
-                    	  <th><a href=\"recordns.php?sort=age&order=".$new_sort_type."&query=$value&searchcategory=$category\"/>Age</th>
-                	      <th>Sex</th>
-						  <th>Present Address</th>
-						  <th>Provincial Address</th>
-						  <th>Civil Status</th>
-						  <th>Birthdate</th>
-						  <th>Birthplace</th>
-						  <th>Religion</th>
-						  <th>Occupation</th>
-						  <th>Monthly Income</th>
-						  <th>Contact Number</th>
-                          <th>Highest Educational Attainment</th>
-                          <th>Remark</th>
-                          <th><i class=\"fa fa-pencil fa-fw\"></i></th>
-                          <th><i class=\"fa fa-times fa-fw\"></i></th>
+                    echo "<td>Last Name</td>
+            	          <td>First Name</td>
+                	      <td>MI</td>
+                    	  <td>Age</td>
+                	      <td>Sex</td>
+						  <td>Present Address</td>
+						  <td>Provincial Address</td>
+						  <td>Civil Status</td>
+						  <td>Birthdate</td>
+						  <td>Birthplace</td>
+						  <td>Religion</td>
+						  <td>Occupation</td>
+						  <td>Monthly Income</td>
+						  <td>Contact Number</td>
+                          <td>Highest Educational Attainment</td>
+                          <td>Remark</td>
+                          <td>Action</td>
                     	  </tr>
                     	  </thead> 
                           <tbody>";
-                    if(empty($_GET['sort'])&&empty($_GET['order'])){
-                        $search="";
-                        $order="";
-                    }else{
-                        $search=$_GET['sort'];
-                        $order=$_GET['order'];
-                        $query=$_GET['query'];
-                    }
-                    if($order=='asc'){
-                        if($search=='age'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY age ASC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY age ASC";
-                                    }
-                            }else if($search=='fname'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY patient_fname ASC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_fname ASC";
-                                    }
-                            }else if($search=='lname'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY patient_lname ASC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_lname ASC";
-                                    }
-                            }else if($search=='minitial'){
-                                 if(empty($query)){
-                                $query="SELECT* FROM PATIENT ORDER BY patient_minitial ASC";
-                                }else{
-                                $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_minitial ASC";
-                                }
-                            }
-                        }else{
-                            if($search=='age'){
-                                if(empty($query)){
-                                $query="SELECT* FROM PATIENT ORDER BY age DESC";
-                                }else{
-                                $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY age DESC";
-                                }
-                            }else if($search=='fname'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY patient_fname DESC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_fname DESC";
-                                    }
-                            }else if($search=='lname'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY patient_lname DESC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_lname DESC";
-                                    }
-                            }else if($search=='minitial'){
-                                if(empty($query)){
-                                    $query="SELECT* FROM PATIENT ORDER BY patient_minitial DESC";
-                                    }else{
-                                    $query="SELECT* FROM PATIENT WHERE $category LIKE '%$query%' ORDER BY patient_minitial DESC";
-                                    }
-                            }
-                        }
-						
 						$result=mysqli_query($connect,$query);
 						while ($row=mysqli_fetch_array($result)) {
 							$f1=$row['patient_fname'];
@@ -370,7 +220,7 @@
                             $f17=$row['school_number'];
                             $remark=$row['patient_remark'];
 							if($f17==1){
-								echo "<tr><td>".$f3."</td><td>" .$f1."</td><td>".$f2."</td><td>" .$f4."</td><td>" .$f5."</td><td>" .$f6."</td><td>" .$f7."</td><td>" .$f8."</td><td>" .$f9."</td><td>" .$f10."</td><td>" .$f11."</td><td>" .$f12."</td><td>" .$f13."</td><td>" .$f14."</td><td>" .$f15."</td><td>$remark</td><td><a href="."'updateNC.php?id=".$f16."';"."><i class='fa fa-pencil fa-fw'></i></a><td><a href=\"delete.php?id=$f16\" onclick=\"return confirm('Are you sure you want to delete?')\"><i class='fa fa-times-circle fa-fw'></i></button></td></tr>";
+								echo "<tr><td>".$f3."</td><td>" .$f1."</td><td>".$f2."</td><td>" .$f4."</td><td>" .$f5."</td><td>" .$f6."</td><td>" .$f7."</td><td>" .$f8."</td><td>" .$f9."</td><td>" .$f10."</td><td>" .$f11."</td><td>" .$f12."</td><td>" .$f13."</td><td>" .$f14."</td><td>" .$f15."</td><td>$remark</td><td><a href="."'updateNC.php?id=".$f16."';"."><i class='fa fa-pencil fa-fw'></i></a><a href=\"delete.php?id=$f16\" onclick=\"return confirm('Are you sure you want to delete?')\"><i class='fa fa-times-circle fa-fw'></i></a><a href=\"viewmore.php?pid=$f16\"><i class='fa fa-external-link'></i></td></tr>";
 							}
 						}
 						?>
@@ -423,7 +273,7 @@
           $f2=$items['unique'];
           echo "<tr><td>$f2</td><td>$f1</td></tr>";
       }
-      echo "</table>";
+      echo "</table></div>";
       ?>
     </div>
       <div class="modal-footer">
@@ -442,7 +292,6 @@
         </div>
     </div>
 
-    <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
@@ -450,3 +299,8 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function(){
+    $('#notStudent').DataTable();
+    });
+</script>

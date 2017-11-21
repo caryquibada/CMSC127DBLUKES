@@ -28,66 +28,66 @@
     $remark=$_POST['patientremark'];
     $sql="UPDATE patient SET patient_fname='$fname' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET monthly_income='$monthly_income' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET highest_educ_attainment='$education' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}
     $sql="UPDATE patient SET patient_lname='$lname' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}
     $sql="UPDATE patient SET patient_minitial='$minitial' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}
     $sql="UPDATE patient SET civil_status='$civilstatus' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET present_address='$praddress' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET provincial_address='$address' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET birthdate='$bday' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET religion='$religion' where patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET birthplace='$bplace' where patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET contact_number='$connum' where patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}
     $sql="UPDATE patient SET occupation='$occupation' where patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }
     $sql="UPDATE patient SET patient_remark='$remark' WHERE patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}
     $sql="UPDATE patient SET sex='$sex' where patient_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
 	}else{
         echo '<script language="javascript" type="text/javascript"> 
-		window.location = "updateNC.php?id='.$id.'&status=1";
+		window.location = "recordns.php";
 		</script>';
 	}
 ?>

@@ -39,20 +39,32 @@
 		}
 	}
 	$sql="INSERT INTO patient (PATIENT_FNAME,PATIENT_LNAME,PATIENT_MINITIAL,SCHOOL_NUMBER,AGE,SEX,PRESENT_ADDRESS,PROVINCIAL_ADDRESS,CIVIL_STATUS,BIRTHPLACE,RELIGION,OCCUPATION,MONTHLY_INCOME,CONTACT_NUMBER,HIGHEST_EDUC_ATTAINMENT,BIRTHDATE,PATIENT_REMARK) VALUES ('$fname','$lname','$minitial','$schoolid','$numage','$sex','$paddress','$address','$cstatus','$birthplace','$religion','$occupation','$monthly_income','$cnumber','$education','$bday','$patient_remark')";
-	if(!mysqli_query($connect,$sql)){
+	if(!mysqli_query($connect,$sql)&&$schoolid!=1){
 		echo 'Insert failure';
 		$placeholder=0;
 		echo '<script language="javascript" type="text/javascript"> 
 		window.location = "new.php?id=0";
 		</script>';
-	}else if($check!=1){
+	}else if($check!=1&&$schoolid!=1){
 		echo "<script language=\"javascript\" type=\"text/javascript\"> 
 		window.location = \"new.php?id=1&sid=$schoolid\";
 		</script>";
-	}else if($check==1){
+	}else if($check==1&&$schoolid!=1){
 	echo "<script language=\"javascript\" type=\"text/javascript\"> 
 			window.location = \"new.php?id=0&sid=$schoolid\"
 		</script>";
+	}else if($check!=1&&$schoolid==1){
+		$query1="SELECT * FROM PATIENT where patient_fname='$fname' AND patient_lname='$lname' AND patient_minitial='$minitial'";
+		$result1=mysqli_query($connect,$query1);
+		$item1=mysqli_fetch_array($result1);
+		$pid=$item1['patient_id'];
+		echo "<script language=\"javascript\" type=\"text/javascript\"> 
+		window.location = \"newns.php?pid=$pid\"
+		</script>";
+	}else{
+		echo "<script language=\"javascript\" type=\"text/javascript\"> 
+		window.location = \"new.php?id=0&sid=$schoolid\"
+	</script>";
 	}
 ?>
 <script>

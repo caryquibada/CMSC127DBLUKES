@@ -15,26 +15,36 @@
 	$bday=date('Y-m-d H:i',strtotime($datevisited));
     $sql="UPDATE school SET school_name='$schoolname' where school_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure school name';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}
     $sql="UPDATE school SET location='$schoollocation' where school_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure location';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}
     $sql="UPDATE school SET contact_person='$contactperson' where school_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure contact person';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}
     $sql="UPDATE school SET activity='$activity' where school_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure activity';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}
 	$sql="UPDATE school SET date_visited='$bday' WHERE school_id=$id";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure date';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}else{
         echo '<script language="javascript" type="text/javascript"> 
-		window.location = "updateS.php?id='.$id.'&status=1";
+		window.location = "schools.php";
 		</script>';
 	}
 ?>

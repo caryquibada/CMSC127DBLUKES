@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -127,7 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -142,7 +145,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Ear Check-up</h1>
                 <?php
-                        if(!empty($_GET)){
+                        if(!empty($_GET['id'])){
                             $id=$_GET['id'];
                             if($id=='0'){
                                 echo "<div class=\"alert alert-warning col-lg-8 alert-dismissible\" role=\"alert\">
@@ -170,7 +173,7 @@
                             if(!mysqli_select_db($connect,'lukedb')){
                                 echo 'Database "upcmscdb" is not selected';
                             }
-                            $query="SELECT * FROM  patient p,school e WHERE p.school_number=e.school_id AND e.activity=\"Ear Screening\" ";
+                            $query="SELECT * FROM  patient p,school e WHERE p.school_number=e.school_id AND (e.activity=\"Ear Screening\" OR e.activity=\"Ear and Eye Screening\") AND p.school_number!=1";
                             $menu= " ";
                             $result=mysqli_query($connect,$query);
                             while($row=mysqli_fetch_array($result)){
@@ -183,9 +186,9 @@
                                 $ear=mysqli_fetch_array($resultear);
                                 $leftear=$ear['left_ear'];
                                 $pid=$_GET['pid'];
-                                if(empty($leftear)&&($f2==$id)){
+                                if(empty($leftear)&&($f2==$pid)){
                                     $menu =$menu."<option value=$f2 selected>".$f1." ".$f3."</option>";
-                                }else if(empty($leftear)&&$f3!=$id){
+                                }else if(empty($leftear)&&$f3!=$pid){
                                     $menu =$menu."<option value=$f2>".$f1." ".$f3."</option>";
                                 }
                             }

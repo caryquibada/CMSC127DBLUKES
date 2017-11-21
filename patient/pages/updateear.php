@@ -1,6 +1,7 @@
 <?php
     $connect = mysqli_connect('localhost','root','');
-    $id=$_GET['id'];
+		$school=$_GET['school'];
+		$id=$_GET['pid'];
 	if(!$connect){
 		echo 'No connection to server';
 	}
@@ -12,18 +13,24 @@
     $rear=$_POST['rightear'];
     $sql="UPDATE ear SET ear_remark ='$rem' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+			echo '<script language="javascript" type="text/javascript"> 
+			window.location = "error.php";
+			</script>';
     }  
     $sql="UPDATE ear SET left_ear='$lear' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+			echo '<script language="javascript" type="text/javascript"> 
+			window.location = "error.php";
+			</script>';
     }  
     $sql="UPDATE ear SET right_ear='$rear' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+			echo '<script language="javascript" type="text/javascript"> 
+			window.location = "error.php";
+			</script>';
 	}else{
         echo '<script language="javascript" type="text/javascript"> 
-		window.location = "earup.php?id='.$id.'&status=1";
+				window.location = "records.php?school='.$school.'";
 		</script>';
 	}
 ?>

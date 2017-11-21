@@ -128,10 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-                        <li>
+						<li>
                            <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
                         </li>
-						
                     </ul>
                 </li>
             </ul>
@@ -140,53 +139,141 @@
 </nav>
 </div>
 <!-- END UI THEME EDIT BELOW-->
-                        <?php
-                        $pid=$_GET['pid'];
-                        echo "<form role=\"form\" action=\"addfamily.php?pid=$pid\" method=\"post\">";
-                        ?>
+
     <div id="page-wrapper">
         <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Patient Information</h1>
+            </div>
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa"></i> Family Composition
+                        <i class="fa"></i> Provider of client's needs
                     </div>
                     <div class="panel-body">
+                    <?php $pid=$_GET['pid'];
+                    
+                              $connect = mysqli_connect('localhost','root','');
+                              
+                              if(!$connect){
+                                  echo 'No connection to server';
+                              }
+                              if(!mysqli_select_db($connect,'lukedb')){
+                                  echo 'Database "lukedb" is not selected';
+                              }
+                            $query="SELECT * FROM EYE_PLAN WHERE PATIENT_ID=$pid";
+                            $result=mysqli_query($connect,$query);
+                            $a=mysqli_fetch_array($result); 
+                            ?>
+                        <form role="form" action="<?php echo "updateeyepoa.php?pid=$pid" ?>" method="post">
+                        <div class="col-lg-12">
                         
-                        <fieldset>
-                        <div id="dynamicInput" class="col-lg-12">
-                            <div class="col-lg-3">
-                             <label>Name</label><br><input type="text" class="form-control col-lg-3" name="myNames[]">
+                            <div class="col-lg-6">
+                            <label>Medical Consultation</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="medicaldate" value="<?php echo $a['medicaldate']; ?>"></input>
                             </div>
-                            <div class="col-lg-3">
-                            <label>Relationship</label><input type="text" class="form-control col-lg-3" name="myRelation[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Age</label><input type="number" class="form-control col-lg-3" name="myAge[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Sex</label><input type="text" class="form-control col-lg-3" name="mySex[]">
-                            </div>
-                            <div class="col-lg-3">
-                             <label>Civil Status</label><br><input type="text" class="form-control col-lg-3" name="myCV[]">
-                             </div>
-                             <div class="col-lg-3">
-                            <label>Educational</label><input type="text" class="form-control col-lg-3" name="myEA[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Occupation</label><input type="text" class="form-control col-lg-3" name="myOccu[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Remarks</label><input type="text" class="form-control col-lg-3" name="myRemarks[]">
+                            
+                            <div class="col-lg-6">
+                            <label>Medical Consultation</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="medical" value="<?php echo $a['medical']; ?>"></input>
                             </div>
                         </div>
-                            <input class="btn btn-primary col-lg-12" value="Add" onClick="addInput('dynamicInput');"></input>
+                        <div class="col-lg-12">
+                        
+                            <div class="col-lg-6">
+                            <label>CP Clearance</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="cpdate" value="<?php echo $a['cpclearancedate']; ?>"></input>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <label>CP Clearance</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="cp" value="<?php echo $a['cpclearance']; ?>"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                        
+                            <div class="col-lg-6">
+                            <label>Surgery</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="surgerydate" value="<?php echo $a['surgerydate']; ?>"></input>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <label>Surgery</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="surgery" value="<?php echo $a['surgery']; ?>"></input>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                       
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="othersdate[]"></input>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="othersremarks[]"></input>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                        
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="othersdate[]"></input>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="othersremarks[]"></input>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                        
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Date</label>
+                            <input class="form-control" type="date" name="othersdate[]"></input>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <label>Others</label>
+                            <label>Remark</label>
+                            <input class="form-control" type="text" name="othersremarks[]"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
                         <br>
+                        <label>Worker's Assessment and Recommendation</label>
+                        <textarea class="form-control" rows="4" name="assessment"><?php echo $a['assement']; ?></textarea>
+                        </div>
+                        <div class="col-lg-12">
+                        <br>
+                            <div class="col-lg-6">
+                            <label>Confirmed</label>
+                            <input type="text" class="form-control col-lg-6" name="confirmed" value="<?php echo $a['confirmed']; ?>"></input>
+                            </div>
+                            <div class="col-lg-6">
+                            <label>Interviewed by</label>
+                            <input type="text" class="form-control col-lg-6" name="interviewed" value="<?php echo $a['interviewed']; ?>"></input>
+                            </div>
+                        </div>
                         </fieldset>
 						<div class="pull-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-outline btn-primary btn-xs">
-                                    NEXT
+                                    SAVE
                                 </button>
                             </div>
                         </div>
@@ -196,27 +283,33 @@
             </div>
         </div>
     </div>
-
+    <script>
+    function showForms(){
+        var name=document.getElementById("hidden");
+        var clName=name.className;
+        if(clName=="show"){
+            name.className="hidden";
+        }else{
+            name.className="show";
+        }
+    }
+    </script>
+    <script>
+    function hideSchool(){
+        var name=document.getElementById("show");
+        var clName=name.className;
+        if(clName=="hidden"){
+            name.className="show";
+        }else{
+            name.className="hidden";
+        }
+    }
+    </script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
-    <script>
-    var counter = 1;
-    var limit = 10;
-    function addInput(divName){
-     if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
-     }
-     else {
-          var newdiv = document.createElement('div');
-          newdiv.innerHTML = "   <div class=\"col-lg-3\"><label>Name</label><br><input type='text' class='form-control col-lg-3' name='myNames[]'></div><div class='col-lg-3'><label>Relationship</label><input type='text' class='form-control col-lg-3' name='myRelation[]'></div><div class='col-lg-3'> <label>Age</label><input type='number' class='form-control col-lg-3' name='myAge[]'></div><div class='col-lg-3'><label>Sex</label><input type='text' class='form-control col-lg-3' name='mySex[]'> </div><div class='col-lg-3'><label>Civil Status</label><br><input type='text' class='form-control col-lg-3' name='myCV[]'> </div><div class='col-lg-3'><label>Education</label><input type='text' class='form-control col-lg-3' name='myEA[]'></div><div class='col-lg-3'> <label>Occupation</label><input type='text' class='form-control col-lg-3' name='myOccu[]'></div><div class='col-lg-3'> <label>Remarks</label><input type='text' class='form-control col-lg-3' name='myRemarks[]'></div>";
-          document.getElementById(divName).appendChild(newdiv);
-          counter++;
-     }
-    }
-  
-    </script>
+
 </body>
 
 </html>

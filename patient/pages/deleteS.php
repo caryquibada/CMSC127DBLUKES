@@ -15,10 +15,12 @@ $sql = "DELETE FROM school WHERE school_id = $id";
 
 if (mysqli_query($connect, $sql)) {
     mysqli_close($connect);
-    header('Location: schools.php'); //If book.php is your main page where you list your all records
+    header('Location: schools.php'); 
     exit;
 } else {
-    echo "Error deleting record";
+	echo '<script language="javascript" type="text/javascript"> 
+	window.location = "error.php";
+	</script>';
 }
 ?>
 </body>

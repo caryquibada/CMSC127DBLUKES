@@ -16,9 +16,8 @@
 	$sql="INSERT INTO school(SCHOOL_NAME,LOCATION,CONTACT_PERSON,ACTIVITY,DATE_VISITED) VALUES ('$sname','$location','$contact_person','$activity','$date_visited')";
 	if(!mysqli_query($connect,$sql)){
 		echo '<script language="javascript" type="text/javascript"> 
-		window.location = "newschool.php?id=0";
+		window.location = "error.php";
 		</script>';
-		
 	}else{
 		echo '<script language="javascript" type="text/javascript"> 
 		window.location = "newschool.php?id=1";

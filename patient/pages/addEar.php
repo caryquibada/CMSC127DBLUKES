@@ -13,7 +13,9 @@
 	$ear_remark=$_POST['earremark'];
 	$sql="INSERT INTO ear(PATIENT_ID,LEFT_EAR,RIGHT_EAR,EAR_REMARK) VALUES ('$patient_id','$left_ear','$right_ear','$ear_remark')";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}else{
 		
 		header('refresh:0;url=ear.php');

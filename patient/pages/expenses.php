@@ -128,10 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-                        <li>
+						<li>
                            <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
                         </li>
-						
                     </ul>
                 </li>
             </ul>
@@ -140,48 +139,76 @@
 </nav>
 </div>
 <!-- END UI THEME EDIT BELOW-->
-                        <?php
-                        $pid=$_GET['pid'];
-                        echo "<form role=\"form\" action=\"addfamily.php?pid=$pid\" method=\"post\">";
-                        ?>
+
     <div id="page-wrapper">
         <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Patient Information</h1>
+            </div>
             <div class="col-lg-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa"></i> Family Composition
-                    </div>
+                        <i class="fa"></i> Monthly Expenses
+                        </div>
                     <div class="panel-body">
-                        
-                        <fieldset>
-                        <div id="dynamicInput" class="col-lg-12">
-                            <div class="col-lg-3">
-                             <label>Name</label><br><input type="text" class="form-control col-lg-3" name="myNames[]">
+                    <?php $pid=$_GET['pid']; ?>
+                        <form role="form" action="<?php echo "addexpenses.php?pid=$pid" ?>" method="post">
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label>Electric Bill</label>
+                            <input class="form-control" type="number" name="ebill"></input>
                             </div>
-                            <div class="col-lg-3">
-                            <label>Relationship</label><input type="text" class="form-control col-lg-3" name="myRelation[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Age</label><input type="number" class="form-control col-lg-3" name="myAge[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Sex</label><input type="text" class="form-control col-lg-3" name="mySex[]">
-                            </div>
-                            <div class="col-lg-3">
-                             <label>Civil Status</label><br><input type="text" class="form-control col-lg-3" name="myCV[]">
-                             </div>
-                             <div class="col-lg-3">
-                            <label>Educational</label><input type="text" class="form-control col-lg-3" name="myEA[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Occupation</label><input type="text" class="form-control col-lg-3" name="myOccu[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Remarks</label><input type="text" class="form-control col-lg-3" name="myRemarks[]">
+                            <div class="col-lg-6">
+                            <label>Food</label>
+                            <input class="form-control" type="number" name="food"></input>
                             </div>
                         </div>
-                            <input class="btn btn-primary col-lg-12" value="Add" onClick="addInput('dynamicInput');"></input>
-                        <br>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label>Fuel</label>
+                            <input class="form-control" type="number" name="fuel"></input>
+                            </div>
+                            <div class="col-lg-6">
+                            <label>Rent</label>
+                            <input class="form-control" type="number" name="rent"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label>Water</label>
+                            <input class="form-control" type="number" name="water"></input>
+                            </div>
+                            <div class="col-lg-6">
+                            <label>Transportation</label>
+                            <input class="form-control" type="number" name="transpo"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label>Education</label>
+                            <input class="form-control" type="number" name="educ"></input>
+                            </div>
+                            <div class="col-lg-6">
+                            <label>Clothing</label>
+                            <input class="form-control" type="number" name="clothing"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-6">
+                            <label>Medical</label>
+                            <input class="form-control" type="number" name="medical"></input>
+                            </div>
+                            <div class="col-lg-6">
+                            <label>Cellphone Load</label>
+                            <input class="form-control" type="number" name="cpload"></input>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <label>Others</label>
+                            <input class="form-control" type="number" name="others"></input>
+                            </div>
+                        </div>
                         </fieldset>
 						<div class="pull-right">
                             <div class="btn-group">
@@ -196,27 +223,33 @@
             </div>
         </div>
     </div>
-
+    <script>
+    function showForms(){
+        var name=document.getElementById("hidden");
+        var clName=name.className;
+        if(clName=="show"){
+            name.className="hidden";
+        }else{
+            name.className="show";
+        }
+    }
+    </script>
+    <script>
+    function hideSchool(){
+        var name=document.getElementById("show");
+        var clName=name.className;
+        if(clName=="hidden"){
+            name.className="show";
+        }else{
+            name.className="hidden";
+        }
+    }
+    </script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
-    <script>
-    var counter = 1;
-    var limit = 10;
-    function addInput(divName){
-     if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
-     }
-     else {
-          var newdiv = document.createElement('div');
-          newdiv.innerHTML = "   <div class=\"col-lg-3\"><label>Name</label><br><input type='text' class='form-control col-lg-3' name='myNames[]'></div><div class='col-lg-3'><label>Relationship</label><input type='text' class='form-control col-lg-3' name='myRelation[]'></div><div class='col-lg-3'> <label>Age</label><input type='number' class='form-control col-lg-3' name='myAge[]'></div><div class='col-lg-3'><label>Sex</label><input type='text' class='form-control col-lg-3' name='mySex[]'> </div><div class='col-lg-3'><label>Civil Status</label><br><input type='text' class='form-control col-lg-3' name='myCV[]'> </div><div class='col-lg-3'><label>Education</label><input type='text' class='form-control col-lg-3' name='myEA[]'></div><div class='col-lg-3'> <label>Occupation</label><input type='text' class='form-control col-lg-3' name='myOccu[]'></div><div class='col-lg-3'> <label>Remarks</label><input type='text' class='form-control col-lg-3' name='myRemarks[]'></div>";
-          document.getElementById(divName).appendChild(newdiv);
-          counter++;
-     }
-    }
-  
-    </script>
+
 </body>
 
 </html>

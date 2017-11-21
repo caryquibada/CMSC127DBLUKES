@@ -1,6 +1,7 @@
 <?php
     $connect = mysqli_connect('localhost','root','');
     $id=$_GET['id'];
+    $school=$_GET['school'];
 	if(!$connect){
 		echo 'No connection to server';
 	}
@@ -34,38 +35,46 @@
 	
     $sql="UPDATE eye SET  eye_remark ='$rem' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }  
     $sql="UPDATE eye SET lvisual_acuity ='$vl' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }  
     $sql="UPDATE eye SET  rvisual_acuity ='$vr' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }  
     $sql="UPDATE eye SET lwith_pinhole ='$wl' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript">              window.location = "error.php";             </script>';
     }  
     $sql="UPDATE eye SET rwith_pinhole ='$wr' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+      echo '<script language="javascript" type="text/javascript"> 
+      window.location = "error.php";
+      </script>';
     }  
     $sql="UPDATE eye SET l_rx ='$rl' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+      echo '<script language="javascript" type="text/javascript"> 
+      window.location = "error.php";
+      </script>';
     }  
     $sql="UPDATE eye SET r_rx ='$rr' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+      echo '<script language="javascript" type="text/javascript"> 
+      window.location = "error.php";
+      </script>';
     }  
     $sql="UPDATE eye SET pd='$pl' where patient_id=$id";
     if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+      echo '<script language="javascript" type="text/javascript"> 
+      window.location = "error.php";
+      </script>';
     }else{
       echo '<script language="javascript" type="text/javascript"> 
-  window.location = "eyeup.php?id='.$id.'&status=1";
+  window.location = "records.php?school='.$school.'";
   </script>';
 }
 ?>

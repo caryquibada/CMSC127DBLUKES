@@ -1,67 +1,361 @@
-create database lukedb;
-use lukedb;
-create table patient(
-patient_id int unsigned not null auto_increment primary key,
-patient_fname varchar(30) not null,
-patient_lname varchar(30) not null,
-patient_minitial char(1) not null,
-school_number int references school(school_id) on update cascade,
-age tinyint(3) not null,
-sex varchar(1) not null,
-present_address varchar(150) null,
-provincial_address varchar(150) null,
-civil_status char(20) null,
-birthdate date null,
-birthplace varchar(150) null,
-religion varchar(30) null,
-occupation varchar(50) null,
-monthly_income varchar(15) null,
-contact_number tinyint(30) unsigned null,
-highest_educ_attainment varchar(50) null,
-patient_remark varchar(500) null
-);
-create table ear(
-patient_id int references patient(patient_id) on update cascade,
-left_ear varchar(5) null,
-right_ear varchar(5) null,
-ear_remark varchar(500) null
-);
-create table school(
-school_id int unsigned not null auto_increment primary key,
-school_name varchar(100) not null,
-location varchar(150) not null,
-contact_person varchar(150) not null,
-activity varchar(30) not null,
-date_visited date not null
-);
-create table eye(
-patient_id int references patient(patient_id) on update cascade,
-lvisual_acuity varchar(8) not null,
-rvisual_acuity varchar(8) not null,
-lwith_pinhole varchar(8) not null,
-rwith_pinhole varchar(8) not null,
-r_rx varchar(50) not null,
-l_rx varchar(50) not null,
-pd varchar(50) not null,
-eye_remark varchar(500)
-);
-CREATE TABLE IF NOT EXISTS `tbl_album` (
-  `albumid` int(10) NOT NULL AUTO_INCREMENT,
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 21, 2017 at 09:58 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `lukedb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ear`
+--
+
+CREATE TABLE `ear` (
+  `patient_id` int(11) DEFAULT NULL,
+  `left_ear` varchar(5) DEFAULT NULL,
+  `right_ear` varchar(5) DEFAULT NULL,
+  `ear_remark` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ear`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ear_plan`
+--
+
+CREATE TABLE `ear_plan` (
+  `medical_consult` varchar(150) NOT NULL,
+  `cpclearance` varchar(150) NOT NULL,
+  `admission` varchar(150) NOT NULL,
+  `discharge` varchar(150) NOT NULL,
+  `surgery` varchar(150) NOT NULL,
+  `followup` varchar(150) NOT NULL,
+  `others` varchar(150) NOT NULL,
+  `medicaldate` date NOT NULL,
+  `cpdate` date NOT NULL,
+  `surgerydate` date NOT NULL,
+  `admissiondate` date NOT NULL,
+  `dischargedate` date NOT NULL,
+  `followupdate` date NOT NULL,
+  `othersdate` varchar(150) NOT NULL,
+  `assessment` varchar(500) NOT NULL,
+  `confirmed` varchar(150) NOT NULL,
+  `interviewed` varchar(150) NOT NULL,
+  `patient_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ear_plan`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `electric` int(10) NOT NULL,
+  `food` int(10) NOT NULL,
+  `fuel` int(10) NOT NULL,
+  `rent` int(10) NOT NULL,
+  `water` int(10) NOT NULL,
+  `transportation` int(10) NOT NULL,
+  `education` int(10) NOT NULL,
+  `clothing` int(10) NOT NULL,
+  `medical` int(10) NOT NULL,
+  `cellphoneload` int(10) NOT NULL,
+  `others` int(10) NOT NULL,
+  `patient_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `expenses`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `extra`
+--
+
+CREATE TABLE `extra` (
+  `problem_presented` varchar(500) NOT NULL,
+  `hist_background` varchar(500) NOT NULL,
+  `no_occupants` int(2) NOT NULL,
+  `no_floors` int(2) NOT NULL,
+  `no_rooms` int(2) NOT NULL,
+  `status_house` varchar(20) NOT NULL,
+  `ownership` varchar(20) NOT NULL,
+  `type_toilet` varchar(20) NOT NULL,
+  `source_water` varchar(20) NOT NULL,
+  `patient_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `extra`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eye`
+--
+
+CREATE TABLE `eye` (
+  `patient_id` int(11) DEFAULT NULL,
+  `lvisual_acuity` varchar(8) NOT NULL,
+  `rvisual_acuity` varchar(8) NOT NULL,
+  `lwith_pinhole` varchar(8) NOT NULL,
+  `rwith_pinhole` varchar(8) NOT NULL,
+  `r_rx` varchar(50) NOT NULL,
+  `l_rx` varchar(50) NOT NULL,
+  `pd` varchar(50) NOT NULL,
+  `eye_remark` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `eye`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eye_plan`
+--
+
+CREATE TABLE `eye_plan` (
+  `visually_impared` varchar(150) NOT NULL,
+  `cause_disability` varchar(150) NOT NULL,
+  `medical` varchar(150) NOT NULL,
+  `cpclearance` varchar(150) NOT NULL,
+  `surgery` varchar(150) NOT NULL,
+  `others` varchar(150) NOT NULL,
+  `medicaldate` date NOT NULL,
+  `cpclearancedate` date NOT NULL,
+  `surgerydate` date NOT NULL,
+  `othersdate` varchar(150) NOT NULL,
+  `assement` varchar(500) NOT NULL,
+  `confirmed` varchar(150) NOT NULL,
+  `interviewed` varchar(150) NOT NULL,
+  `patient_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `eye_plan`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `family`
+--
+
+CREATE TABLE `family` (
+  `PATIENT_ID` int(10) NOT NULL,
+  `family_name` varchar(100) NOT NULL,
+  `relationship` varchar(100) NOT NULL,
+  `age` int(3) NOT NULL,
+  `sex` varchar(6) NOT NULL,
+  `civil_status` varchar(100) NOT NULL,
+  `educational_attainment` varchar(100) NOT NULL,
+  `occupation` varchar(100) NOT NULL,
+  `remark` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `family`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patient`
+--
+
+CREATE TABLE `patient` (
+  `patient_id` int(10) UNSIGNED NOT NULL,
+  `patient_fname` varchar(30) NOT NULL,
+  `patient_lname` varchar(30) NOT NULL,
+  `patient_minitial` char(1) NOT NULL,
+  `school_number` int(11) DEFAULT NULL,
+  `age` tinyint(3) NOT NULL,
+  `sex` varchar(1) NOT NULL,
+  `present_address` varchar(150) DEFAULT NULL,
+  `provincial_address` varchar(150) DEFAULT NULL,
+  `civil_status` char(20) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `birthplace` varchar(150) DEFAULT NULL,
+  `religion` varchar(30) DEFAULT NULL,
+  `occupation` varchar(50) DEFAULT NULL,
+  `monthly_income` varchar(50) DEFAULT NULL,
+  `contact_number` varchar(50) DEFAULT NULL,
+  `highest_educ_attainment` varchar(50) DEFAULT NULL,
+  `patient_remark` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `patient`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provider`
+--
+
+CREATE TABLE `provider` (
+  `name` varchar(150) NOT NULL,
+  `occu` varchar(150) NOT NULL,
+  `relationship` varchar(150) NOT NULL,
+  `income` varchar(20) NOT NULL,
+  `needs_provided` varchar(150) NOT NULL,
+  `donor_name` varchar(150) NOT NULL,
+  `affiliation` varchar(20) NOT NULL,
+  `services_provided` varchar(150) NOT NULL,
+  `total_income` varchar(150) NOT NULL,
+  `patient_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `provider`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school`
+--
+
+CREATE TABLE `school` (
+  `school_id` int(10) UNSIGNED NOT NULL,
+  `school_name` varchar(100) NOT NULL,
+  `location` varchar(150) NOT NULL,
+  `contact_person` varchar(150) NOT NULL,
+  `activity` varchar(30) NOT NULL,
+  `date_visited` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `school`
+--
+
+INSERT INTO `school` (`school_id`, `school_name`, `location`, `contact_person`, `activity`, `date_visited`) VALUES
+(1, '-', 'NONE', 'NONE', 'NONE', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_album`
+--
+
+CREATE TABLE `tbl_album` (
+  `albumid` int(10) NOT NULL,
   `name` varchar(500) NOT NULL,
   `adesc` varchar(1000) NOT NULL,
   `image` varchar(500) NOT NULL,
   `date` datetime NOT NULL,
-  `status` varchar(10) NOT NULL,
-  PRIMARY KEY (`albumid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `tbl_gallery` (
-  `gid` int(10) NOT NULL AUTO_INCREMENT,
+--
+-- Dumping data for table `tbl_album`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_gallery`
+--
+
+CREATE TABLE `tbl_gallery` (
+  `gid` int(10) NOT NULL,
   `aid` int(10) NOT NULL,
   `gname` varchar(1000) NOT NULL,
   `gimages` varchar(1000) NOT NULL,
   `date` datetime NOT NULL,
-  `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`gid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
-INSERT INTO school (school_id, school_name, location, contact_person, activity, date_visited) VALUES ('1', '-', 'NONE', 'NONE', 'NONE', '');
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_gallery`
+--
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `patient`
+--
+ALTER TABLE `patient`
+  ADD PRIMARY KEY (`patient_id`);
+
+--
+-- Indexes for table `school`
+--
+ALTER TABLE `school`
+  ADD PRIMARY KEY (`school_id`);
+
+--
+-- Indexes for table `tbl_album`
+--
+ALTER TABLE `tbl_album`
+  ADD PRIMARY KEY (`albumid`);
+
+--
+-- Indexes for table `tbl_gallery`
+--
+ALTER TABLE `tbl_gallery`
+  ADD PRIMARY KEY (`gid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `patient`
+--
+ALTER TABLE `patient`
+  MODIFY `patient_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+--
+-- AUTO_INCREMENT for table `school`
+--
+ALTER TABLE `school`
+  MODIFY `school_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `tbl_album`
+--
+ALTER TABLE `tbl_album`
+  MODIFY `albumid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `tbl_gallery`
+--
+ALTER TABLE `tbl_gallery`
+  MODIFY `gid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

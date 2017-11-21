@@ -39,7 +39,9 @@
 	$eyeremark=$_POST['eyeremark'];
 	$sql="INSERT INTO eye(PATIENT_ID,LVISUAL_ACUITY,RVISUAL_ACUITY,LWITH_PINHOLE,RWITH_PINHOLE,L_RX,R_RX,PD,EYE_REMARK) VALUES ('$patient_id','$visualacuityl','$visualacuityr','$withpinholel','$withpinholer','$rxl','$rxr','$pdl','$eyeremark')";
 	if(!mysqli_query($connect,$sql)){
-		echo 'Insert failure';
+		echo '<script language="javascript" type="text/javascript"> 
+		window.location = "error.php";
+		</script>';
 	}else{
 		echo '<script language="javascript" type="text/javascript"> 
 		window.location = "eye.php?id=1";

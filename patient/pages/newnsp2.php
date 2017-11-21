@@ -150,7 +150,7 @@
                             if($id=='0'){
                                 echo "<div class=\"alert alert-warning col-lg-8 alert-dismissible\" role=\"alert\">
                                     <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">OK</span></button>
-                                    <strong>Error!</strong> Check your inputs.
+                                    <strong>Warning!</strong> Better check yourself, you're not looking too good.
                                     </div>";
                             }
                             if($id=='1'){
@@ -174,15 +174,14 @@
                                 <div class="form-group col-lg-12">
 									<label>Community Patient?</label>
                                     </br>
-									<input type="radio" name="student" value="student" onchange="document.getElementById('test').selected=true;document.getElementById('notstudent').disabled=true;document.getElementById('notstudent1').disabled=true;document.getElementById('notstudent2').disabled=true;document.getElementById('notstudent3').disabled=true;document.getElementById('notstudent4').disabled=true;document.getElementById('notstudent5').disabled=true;document.getElementById('notstudent6').disabled=true;document.getElementById('notstudent7').disabled=true;document.getElementById('notstudent8').disabled=true;document.getElementById('notstudent9').disabled=true;document.getElementById('school').disabled=false;showForms();hideSchool();" checked>
+									<input type="radio" name="student" value="student" onclick="document.getElementById('none').selected=true;document.getElementById('notstudent').disabled=true;document.getElementById('notstudent1').disabled=true;document.getElementById('notstudent2').disabled=true;document.getElementById('notstudent3').disabled=true;document.getElementById('notstudent4').disabled=true;document.getElementById('notstudent5').disabled=true;document.getElementById('notstudent6').disabled=true;document.getElementById('notstudent7').disabled=true;document.getElementById('notstudent8').disabled=true;document.getElementById('notstudent9').disabled=true;document.getElementById('school').disabled=false;" checked>
 									Yes
                                     </br>
-									<input type="radio" name="student" value="student" onchange="document.getElementById('none').selected=true;document.getElementById('notstudent').disabled=false;document.getElementById('notstudent1').disabled=false;document.getElementById('notstudent2').disabled=false;document.getElementById('notstudent3').disabled=false;document.getElementById('notstudent4').disabled=false;document.getElementById('notstudent5').disabled=false;document.getElementById('notstudent6').disabled=false;document.getElementById('notstudent7').disabled=false;document.getElementById('notstudent8').disabled=false;document.getElementById('notstudent9').disabled=false;document.getElementById('school').disabled=true;showForms();hideSchool();">
+									<input type="radio" name="student" value="student" onclick="document.getElementById('none').selected=false;document.getElementById('notstudent').disabled=false;document.getElementById('notstudent1').disabled=false;document.getElementById('notstudent2').disabled=false;document.getElementById('notstudent3').disabled=false;document.getElementById('notstudent4').disabled=false;document.getElementById('notstudent5').disabled=false;document.getElementById('notstudent6').disabled=false;document.getElementById('notstudent7').disabled=false;document.getElementById('notstudent8').disabled=false;document.getElementById('notstudent9').disabled=false;document.getElementById('school').disabled=true;">
 									No
 									</input>
 									</br>
                                     </br>
-                                    <div class="show" id="show">
                                     <label>Community Name:</label>
 									<select class="form-control" name="school_id" id="school">
 								        <?php
@@ -193,7 +192,6 @@
                                             if(!mysqli_select_db($connect,'lukedb')){
                                                 echo 'Database "lukedb" is not selected';
                                             }
-                                            $sid=$_GET['sid'];
                                             $query="SELECT * FROM  school";
                                             $menu= " ";
                                             $result=mysqli_query($connect,$query);
@@ -201,27 +199,25 @@
                                                 unset($f1);
                                                 $f1=$row['school_name'];
                                                 $f2=$row['school_id'];
-                                                if(strcmp($f1,'-')==0){
-                                                    echo "<option value=$f2 id=\"none\">$f1</option>";
-                                                }else if(!empty($sid)&&($sid==$f2)){
-                                                    echo "<option value=$f2 id=\"test\" selected > $f1 </option>";
+                                                if(strcmp($f1,'-')){
+                                                    $menu =$menu."<option value=$f2 id=\"none\" selected=\"false\">".$f1."</option>";
                                                 }else{
-                                                    echo "<option value=$f2 id=\"test\" selected>$f1</option>";
+                                                    $menu =$menu."<option value=$f2 selected>".$f1."</option>";
                                                 }
                                                
                                             }
+                                            echo $menu;
 										?>
 									</select>
                                 </div>
                             </div>
-                            </div>
                             <div class="form-group col-lg-4">
                                 <label>Name:</label>
-                                <input class="form-control" placeholder="Last Name" name="lastname" type="text" maxlength="30" required>
+                                <input class="form-control" placeholder="Last Name" name="lastname" type="text" required>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>.</label>
-                                <input class="form-control" placeholder="First Name" name="firstname" type="text" maxlength="30" required>
+                                <input class="form-control" placeholder="First Name" name="firstname" type="text" required>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>.</label>
@@ -237,16 +233,15 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>Age:</label>
-                                <input class="form-control" placeholder="Age" name="age" type="number" maxlength="3" required>
+                                <input class="form-control" placeholder="Age" name="age" type="number" required>
                             </div>
-                            <div class="hidden" id="hidden">
                             <div class="form-group col-lg-12">
                                 <label>Present Address:</label>
-                                <input class="form-control" placeholder="Present Address" name="praddress" maxlength="150" type="text" id="notstudent" disabled>
+                                <input class="form-control" placeholder="Present Address" name="praddress" type="text" id="notstudent" disabled>
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Provincial Address:</label>
-                                <input class="form-control" placeholder="Provincial Address" name="address" maxlength="150" type="text" id="notstudent1" disabled>
+                                <input class="form-control" placeholder="Provincial Address" name="address" type="text" id="notstudent1" disabled>
                             </div>
                             <div class="form-group">
                                 <div class="form-group col-lg-12">
@@ -266,15 +261,15 @@
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Birth place:</label>
-                                <input class="form-control" placeholder="Birth place"type="text" maxlength="150" name="birthplace" id="notstudent3" value="" disabled>
+                                <input class="form-control" placeholder="Birth place"type="text" name="birthplace" id="notstudent3" value="" disabled>
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Religion:</label>
-                                <input class="form-control" placeholder="Religion" type="text" name="preligion" maxlength="30" id="notstudent4" disabled>
+                                <input class="form-control" placeholder="Religion" type="text" name="preligion" id="notstudent4" disabled>
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Occupation:</label>
-                                <input class="form-control" placeholder="Occupation" type="text" name="occupation" maxlength="50" id="notstudent5" disabled>
+                                <input class="form-control" placeholder="Occupation" type="text" name="occupation" id="notstudent5" disabled>
                             </div>
                             <div class="form-group">
                                 <div class="form-group col-lg-12">
@@ -292,31 +287,25 @@
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Contact No.:</label>
-                                <input class="form-control" placeholder="Name" type="text" name="contactnumber" maxlength="50" id="notstudent7" disabled>
+                                <input class="form-control" placeholder="Name" type="text" name="contactnumber" id="notstudent7" disabled>
                             </div>
                             <div class="form-group">
                                 <div class="form-group col-lg-12">
                                     <label>Educational Attainment:</label>
                                     <select class="form-control" name="formEduc" id="notstudent8" disabled>
-                                        <option value="Elementary"> Elementary</option>
-                                        <option value="Highschool"> Highschool </option>
-                                        <option value="Highschool Graduate"> Highschool Graduate</option>
-                                        <option value="College"> College</option>
-										<option value="College Graduate"> College Graduate</option>
-										<option value="No read, No write"> No read, No write</option>
+                                        <option> Elementary</option>
+                                        <option> Highschool </option>
+                                        <option> Highschool Graduate</option>
+                                        <option> College</option>
+										<option> College Graduate</option>
+										<option> No read, No write</option>
                                     </select>
                                 </div>
-                            </div>
-                            
-                            </div>
-                            <div class="form-group col-lg-12">
-                                <label>Remark:</label>
-                                <textarea class="form-control" rows="3" name="patient_remark"></textarea>
                             </div>
                         </fieldset>
 						<div class="pull-right">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-outline btn-primary btn-xs" onclick ="document.getElementById('notstudent').disabled=false;document.getElementById('notstudent1').disabled=false;document.getElementById('notstudent2').disabled=false;document.getElementById('notstudent3').disabled=false;document.getElementById('notstudent4').disabled=false;document.getElementById('notstudent5').disabled=false;document.getElementById('notstudent6').disabled=false;document.getElementById('notstudent7').disabled=false;document.getElementById('notstudent8').disabled=false;document.getElementById('notstudent9').disabled=false;document.getElementById('school').disabled=false;">
+                                <button type="next" class="btn btn-outline btn-primary btn-xs" onclick ="document.getElementById('notstudent').disabled=false;document.getElementById('notstudent1').disabled=false;document.getElementById('notstudent2').disabled=false;document.getElementById('notstudent3').disabled=false;document.getElementById('notstudent4').disabled=false;document.getElementById('notstudent5').disabled=false;document.getElementById('notstudent6').disabled=false;document.getElementById('notstudent7').disabled=false;document.getElementById('notstudent8').disabled=false;document.getElementById('notstudent9').disabled=false;document.getElementById('school').disabled=false;">
                                     SAVE
                                 </button>
                             </div>
@@ -327,28 +316,7 @@
             </div>
         </div>
     </div>
-    <script>
-    function showForms(){
-        var name=document.getElementById("hidden");
-        var clName=name.className;
-        if(clName=="show"){
-            name.className="hidden";
-        }else{
-            name.className="show";
-        }
-    }
-    </script>
-    <script>
-    function hideSchool(){
-        var name=document.getElementById("show");
-        var clName=name.className;
-        if(clName=="hidden"){
-            name.className="show";
-        }else{
-            name.className="hidden";
-        }
-    }
-    </script>
+
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>

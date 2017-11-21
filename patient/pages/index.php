@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -127,7 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -142,6 +145,7 @@
             </div>
         </div>
         <div class="row">
+        <a href="eye.php">
             <div class="col-lg-4 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -155,16 +159,18 @@
                             </div>
                         </div>
                     </div>
-                    <a href="eye.php">
+                    
                         <div class="panel-footer">
                             <span class="pull-left">Start Check-up</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
-                    </a>
+                    
                 </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6">
+            <a href="ear.php">
                 <div class="panel panel-green">
                     <div class="panel-heading">
                         <div class="row">
@@ -177,16 +183,18 @@
                             </div>
                         </div>
                     </div>
-                    <a href="ear.php">
+                    
                         <div class="panel-footer">
                             <span class="pull-left">Start Check-up</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
-                    </a>
+                   
                 </div>
+                </a>
             </div>
             <div class="row">
+            <a href="picture.php">
                 <div class="col-lg-4 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -200,17 +208,19 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="picture.php">
+                        
                             <div class="panel-footer">
                                 <span class="pull-left">View</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
-                        </a>
+                        
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6">
+            <a href="records.php">
                 <div class="panel panel-yellow">
                     <div class="panel-heading">
                         <div class="row">
@@ -223,16 +233,18 @@
                             </div>
                         </div>
                     </div>
-                    <a href="records.php">
+                    
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
-                    </a>
+                    
                 </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6">
+            <a href="schools.php">
                 <div class="panel panel-red">
                     <div class="panel-heading">
                         <div class="row">
@@ -245,14 +257,15 @@
                             </div>
                         </div>
                     </div>
-                    <a href="schools.php">
+                    
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                             <div class="clearfix"></div>
                         </div>
-                    </a>
+                    
                 </div>
+                </a>
             </div>
             
                 </br></br></br>

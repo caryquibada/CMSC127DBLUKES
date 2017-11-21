@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Luke Foundation, Inc.</title>
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
@@ -127,7 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-						
+						<li>
+                           <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -172,7 +175,7 @@
                                     if(!mysqli_select_db($connect,'lukedb')){
                                         echo 'Database "lukedb" is not selected';
                                     }
-                                    $query="SELECT * FROM  patient p,school e WHERE p.school_number=e.school_id AND e.activity=\"Eye Screening\" ";
+                                    $query="SELECT * FROM  patient p,school e WHERE p.school_number=e.school_id AND (e.activity=\"Eye Screening\" OR e.activity=\"Ear and Eye Screening\") AND p.school_number!=1";
                                     $menu= " ";
                                     echo "TEST";
                                     $result=mysqli_query($connect,$query);
@@ -187,7 +190,7 @@
                                         $eye=$vac['rvisual_acuity'];
                                         if(empty($eye)){
                                             if($pid==$f2){
-                                            $menu =$menu."<option value=$f2 selected>".$f1." ".$f3."</option>";
+                                                $menu =$menu."<option value=$f2 selected>".$f1." ".$f3."</option>";
                                             }else{
                                                 $menu =$menu."<option value=$f2>".$f1." ".$f3."</option>";
                                             }

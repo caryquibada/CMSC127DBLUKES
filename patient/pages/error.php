@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="http://localhost/Luke/"><img align = "left" class="img-responsive img-centered img-xs" style = "width:48px;" src="lukelogo.png">Luke Foundation, Inc. Database</a>
-    </div>
+        </div>
     <ul class="nav navbar-top-links navbar-right">
         <li>
             <a href="index.php">
@@ -128,10 +128,9 @@
 						<li>
                            <a href="viewgallery.php"><i class="fa fa-eye fa-fw"></i> View Gallery</a>
                         </li>
-                        <li>
+						<li>
                            <a href="picture.php"><i class="fa fa-camera-retro fa-fw"></i> View Pictures</a>
                         </li>
-						
                     </ul>
                 </li>
             </ul>
@@ -140,83 +139,32 @@
 </nav>
 </div>
 <!-- END UI THEME EDIT BELOW-->
-                        <?php
-                        $pid=$_GET['pid'];
-                        echo "<form role=\"form\" action=\"addfamily.php?pid=$pid\" method=\"post\">";
-                        ?>
+
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa"></i> Family Composition
-                    </div>
-                    <div class="panel-body">
-                        
-                        <fieldset>
-                        <div id="dynamicInput" class="col-lg-12">
-                            <div class="col-lg-3">
-                             <label>Name</label><br><input type="text" class="form-control col-lg-3" name="myNames[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Relationship</label><input type="text" class="form-control col-lg-3" name="myRelation[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Age</label><input type="number" class="form-control col-lg-3" name="myAge[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Sex</label><input type="text" class="form-control col-lg-3" name="mySex[]">
-                            </div>
-                            <div class="col-lg-3">
-                             <label>Civil Status</label><br><input type="text" class="form-control col-lg-3" name="myCV[]">
-                             </div>
-                             <div class="col-lg-3">
-                            <label>Educational</label><input type="text" class="form-control col-lg-3" name="myEA[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Occupation</label><input type="text" class="form-control col-lg-3" name="myOccu[]">
-                            </div>
-                            <div class="col-lg-3">
-                            <label>Remarks</label><input type="text" class="form-control col-lg-3" name="myRemarks[]">
-                            </div>
-                        </div>
-                            <input class="btn btn-primary col-lg-12" value="Add" onClick="addInput('dynamicInput');"></input>
-                        <br>
-                        </fieldset>
-						<div class="pull-right">
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-outline btn-primary btn-xs">
-                                    NEXT
-                                </button>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
+            <div class="col-lg-12">
+            <h1><strong>Error!</strong> It seems like an error occured. Please check your inputs. Tips: shorten your input or remove any apostrophes or quotation marks from your input</h1>
+            </div>
+            <div class="col-lg-12">
+            <h1><button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
             </div>
         </div>
     </div>
+             <br/><br/><br/>
+             <br/><br/><br/>
+             <br/><br/><br/>
+             
 
+<script>
+function goBack() {
+    window.history.go(-1);
+}
+</script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/metisMenu/metisMenu.min.js"></script>
     <script src="../dist/js/sb-admin-2.js"></script>
-    <script>
-    var counter = 1;
-    var limit = 10;
-    function addInput(divName){
-     if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
-     }
-     else {
-          var newdiv = document.createElement('div');
-          newdiv.innerHTML = "   <div class=\"col-lg-3\"><label>Name</label><br><input type='text' class='form-control col-lg-3' name='myNames[]'></div><div class='col-lg-3'><label>Relationship</label><input type='text' class='form-control col-lg-3' name='myRelation[]'></div><div class='col-lg-3'> <label>Age</label><input type='number' class='form-control col-lg-3' name='myAge[]'></div><div class='col-lg-3'><label>Sex</label><input type='text' class='form-control col-lg-3' name='mySex[]'> </div><div class='col-lg-3'><label>Civil Status</label><br><input type='text' class='form-control col-lg-3' name='myCV[]'> </div><div class='col-lg-3'><label>Education</label><input type='text' class='form-control col-lg-3' name='myEA[]'></div><div class='col-lg-3'> <label>Occupation</label><input type='text' class='form-control col-lg-3' name='myOccu[]'></div><div class='col-lg-3'> <label>Remarks</label><input type='text' class='form-control col-lg-3' name='myRemarks[]'></div>";
-          document.getElementById(divName).appendChild(newdiv);
-          counter++;
-     }
-    }
-  
-    </script>
+
 </body>
 
 </html>

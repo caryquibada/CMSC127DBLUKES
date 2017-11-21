@@ -15,10 +15,12 @@ $sql = "DELETE FROM patient WHERE patient_id = $id";
 
 if (mysqli_query($connect, $sql)) {
 	mysqli_close($connect);
-    header('Location: records.php'); //If book.php is your main page where you list your all records
+    header('Location: records.php'); 
     exit;
 } else {
-    echo "Error deleting record";
+    echo '<script language="javascript" type="text/javascript"> 
+	window.location = "error.php";
+	</script>';
 }
 ?>
 </body>
